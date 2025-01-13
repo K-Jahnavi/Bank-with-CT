@@ -12,18 +12,49 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css" />
 </head>
-
-<body>
-<script>
+<!-- Data Layer -->
+    <script>
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'pageview',
             'page': {
-                'title': 'Home | CS Bank',
+                'title': document.title,
                 'url': window.location.href
             }
         });
+
+        // Function to get page name
+        function getPageName() {
+            const title = document.title;
+            if (title.includes('Home')) {
+                return 'Home';
+            } else if (title.includes('CS Bank')) {
+                return 'CS Bank';
+            } else if (title.includes('Customers')) {
+                return 'Customers';
+            } else {
+                return 'Unknown';
+            }
+        }
+
+        // Example usage
+        console.log('Page Name:', getPageName());
+
+        // Function to track clicks
+        function trackClick(event) {
+            window.dataLayer.push({
+                'event': 'click',
+                'element': event.target.tagName,
+                'elementId': event.target.id,
+                'elementClasses': event.target.className,
+                'elementText': event.target.innerText
+            });
+        }
+
+        // Add event listener for clicks
+        document.addEventListener('click', trackClick);
     </script>
+<body>
     <!-- navbar starts here  -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark px-4">
         <div class="container-fluid ">
